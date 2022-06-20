@@ -134,8 +134,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<WidgetsLocali
     I18n._shouldReload = false;
     final String lang = I18n._locale != null ? I18n._locale.toString() : "";
     final String languageCode = I18n._locale != null ? I18n._locale${isNullSafetyOn ? "!" : ""}.languageCode : "";
-    ${localeList.map((e) => 'if ("' + (e as String).replaceAll('-', '_') + '" == lang) {\n\t\t\treturn SynchronousFuture<WidgetsLocalizations>(const _I18n_' + e.replaceAll("-", "_") + '());\n\t\t}').join('\n\t\telse ')}
-    else ${localeList.map((e) => 'if ("' + (e as String).split('-')[0] + '" == languageCode) {\n\t\t\treturn SynchronousFuture<WidgetsLocalizations>(const _I18n_' + e.replaceAll("-", "_") + '());\n\t\t}').join('\n\t\telse ')}
+    ${localeList.map((e) => 'if ("' + (e as String).replaceAll('-', '_') + '" == lang) {\n\t\t\treturn SynchronousFuture<WidgetsLocalizations>(const I18n_' + e.replaceAll("-", "_") + '());\n\t\t}').join('\n\t\telse ')}
+    else ${localeList.map((e) => 'if ("' + (e as String).split('-')[0] + '" == languageCode) {\n\t\t\treturn SynchronousFuture<WidgetsLocalizations>(const I18n_' + e.replaceAll("-", "_") + '());\n\t\t}').join('\n\t\telse ')}
 
     return SynchronousFuture<WidgetsLocalizations>(const I18n());
   }
