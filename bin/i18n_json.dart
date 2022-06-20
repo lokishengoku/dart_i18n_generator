@@ -1,22 +1,15 @@
-
-
 import 'package:i18n_json/i18n_json.dart' as i18n_json;
-import 'package:yaml/yaml.dart';
 import 'dart:async';
 import 'dart:io' as io;
-import 'dart:convert';
 import 'package:path/path.dart' as path;
-
-
 
 Future<Map<String, dynamic>> tryYamlThenJson(String basepath) async {
   if (io.File(basepath + '.yaml').existsSync()) {
-    return i18n_json.convertYamlNode(await (i18n_json.readYamlFile(basepath + '.yaml')));
+    return i18n_json
+        .convertYamlNode(await (i18n_json.readYamlFile(basepath + '.yaml')));
   }
   return await i18n_json.readJsonFile(basepath + '.json');
 }
-
-
 
 void main(List<String> arguments) {
   var isNullSafeFuture = i18n_json.getProjectNullSafety();
@@ -101,15 +94,15 @@ class I18n implements WidgetsLocalizations {
   TextDirection get textDirection => TextDirection.${i18n_json.getTextDirection(config, defaultLocale)};
 ${defaultLocaleTranslation.values.map((element) => "\t" + element.comment() + "\n\t" + element.toString()).join("\n")}
 }
-class _I18n_${defaultLocale.replaceAll("-", "_")} extends I18n {
-  const _I18n_${defaultLocale.replaceAll("-", "_")}();
+class I18n_${defaultLocale.replaceAll("-", "_")} extends I18n {
+  const I18n_${defaultLocale.replaceAll("-", "_")}();
 }
 ''');
 
     localeTranslationListMap.forEach((locale, translationList) {
       writeSink.write('''
-class _I18n_${locale.replaceAll("-", "_")} extends I18n {
-  const _I18n_${locale.replaceAll("-", "_")}();
+class I18n_${locale.replaceAll("-", "_")} extends I18n {
+  const I18n_${locale.replaceAll("-", "_")}();
   @override
   TextDirection get textDirection => TextDirection.${i18n_json.getTextDirection(config, locale)};
 ${translationList.values.map((element) => "\t" + element.comment() + "\n\t@override\n\t" + element.toString()).join("\n")}
